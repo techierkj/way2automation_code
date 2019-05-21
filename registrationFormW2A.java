@@ -22,23 +22,28 @@ public class registrationFormW2A {
 		driver.get("http://way2automation.com/way2auto_jquery/index.php");
 		driver.findElement(By.xpath("(//*[@id='load_form']/fieldset[1]/input)[2]")).sendKeys("Ravi");
 		driver.findElement(By.xpath("(//*[@id='load_form']/fieldset[2]/input)[2]")).sendKeys("8793344605");
-		driver.findElement(By.xpath("//*[@id='load_form']/fieldset[3]/input")).sendKeys("rkjtechie11@gmail.com");
+		driver.findElement(By.xpath("//*[@id='load_form']/fieldset[3]/input")).sendKeys("rkjtech@gmail.com");
 		WebElement country = driver.findElement(By.xpath("//*[@id='load_form']/fieldset[4]/select"));
 		Select countrySelect = new Select(country);
 		countrySelect.selectByValue("Hungary");
 		driver.findElement(By.xpath("//*[@id='load_form']/fieldset[5]/input")).sendKeys("Pune");
-		driver.findElement(By.xpath("//*[@id='load_form']/fieldset[6]/input")).sendKeys("rkjtechie");
+		driver.findElement(By.xpath("//*[@id='load_form']/fieldset[6]/input")).sendKeys("rkjtech");
 		driver.findElement(By.xpath("//*[@id='load_form']/fieldset[7]/input")).sendKeys("rkjtechie");
 		driver.findElement(By.xpath("(//*[@id=\"load_form\"]/div/div[2]/input)[2]")).click();
 
-		// Validate if user is present or not
-		WebDriverWait wait = new WebDriverWait(driver, 10L);
-		String message = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("alert"))).getText();
-		if (message.length() > 0) {
-			System.out.println("Username already registered");
-		} else {
-			System.out.println("User created successfully");
+		try {
+			WebElement ele = driver.findElement(By.id("alert"));
+			String message = ele.getText();
+			if (message.length() > 0) {
+				System.out.println("Username already registered");
+			}
+			else {
+				System.out.println("Username created");
+			}
+		} catch (Exception e) {
+			System.out.println("Exception thrown  :" + e);
 		}
+
 		driver.close();
 	}
 }
